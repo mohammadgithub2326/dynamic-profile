@@ -776,11 +776,20 @@ background-color: #1f2937;
 </div>
 </div>
 </div>
-<div id="get-in-touch-floating" class="fixed bottom-24 right-8 z-40 flex items-center">
-  <img src="jerryhello-croped.gif" alt="Contact cartoon" class="w-14 h-14">
-  <button id="floating-contact-btn" class="ml-2 px-3 py-1 bg-primary text-white text-sm font-medium !rounded-button shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-    Say Hello!
-  </button>
+<div id="get-in-touch-floating" class="fixed bottom-24 right-8 z-40">
+  <div class="relative">
+    <!-- Image aligned to the left -->
+    <img src="jerryhello-croped.gif" alt="Contact cartoon" class="w-14 h-14">
+    
+    <!-- Text button positioned on top of the image -->
+    <button id="floating-contact-btn" 
+            class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                   px-3 py-1 bg-primary text-white text-xs font-medium 
+                   !rounded-button shadow-lg hover:shadow-xl transition-shadow 
+                   whitespace-nowrap">
+      Say Hello!
+    </button>
+  </div>
 </div>
 </section>
 <div id="project-details-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
