@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Full Stack Developer</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#6366F1',secondary:'#EC4899'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+@keyframes float {
+0% {
+transform: translate(0, 0);
+opacity: 0.1;
+}
+50% {
+opacity: 0.5;
+}
+100% {
+transform: translate(0, -100px);
+opacity: 0.1;
+}
+}
+.progress-bar {
+position: fixed;
+top: 0;
+left: 0;
+width: 0;
+height: 3px;
+background: linear-gradient(to right, #6366F1, #EC4899);
+z-index: 9999;
+transition: width 0.3s ease;
+}
+body {
+font-family: 'Inter', sans-serif;
+cursor: none;
+transition: background-color 0.5s ease, color 0.5s ease;
+}
+.dark .section-card {
+background-color: #1f2937;
+color: #f3f4f6;
+}
+.dark .section-card p {
+color: #9ca3af;
+}
+.dark .section-card span {
+background-color: #374151;
+color: #f3f4f6;
+}
+.dark input,
+.dark textarea {
+background-color: #1f2937;
+border-color: #374151;
+color: #f3f4f6;
+}
+.dark input::placeholder,
+.dark textarea::placeholder {
+color: #6b7280;
+}
+.dark .bg-white {
+background-color: #1f2937;
+}
+.dark .text-gray-600,
+.dark .text-gray-700 {
+color: #9ca3af;
+}
+.dark .border-gray-300 {
+border-color: #374151;
+}
+.dark .hover\:bg-gray-100:hover {
+background-color: #374151;
+}
+.dark .bg-gray-100 {
+background-color: #374151;
+}
+.dark .bg-gray-200 {
+background-color: #4b5563;
+}
+.dark .bg-gray-800 {
+background-color: #111827;
+}
+.splash-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #111827;
+z-index: 9999;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: opacity 0.5s ease-out;
+}
+.testimonial {
+position: absolute;
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+text-align: center;
+max-width: 80%;
+}
+.logo-reveal {
+position: absolute;
+opacity: 0;
+transform: scale(0.8);
+transition: opacity 1s ease, transform 1s ease;
+}
+.cursor {
+position: fixed;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background-color: rgba(99, 102, 241, 0.7);
+transform: translate(-50%, -50%);
+pointer-events: none;
+z-index: 9999;
+mix-blend-mode: difference;
+}
+.cursor-follower {
+position: fixed;
+width: 40px;
+height: 40px;
+border: 2px solid rgba(99, 102, 241, 0.3);
+border-radius: 50%;
+transform: translate(-50%, -50%);
+pointer-events: none;
+z-index: 9998;
+transition: transform 0.1s ease;
+}
+.binary {
+position: fixed;
+pointer-events: none;
+user-select: none;
+z-index: 9997;
+transition: transform 0.05s linear;
+will-change: transform, opacity;
+}
+.heart {
+position: absolute;
+font-size: 16px;
+color: #f43f5e;
+pointer-events: none;
+animation: float 2s ease-out forwards;
+z-index: 9997;
+}
+.explosion {
+position: absolute;
+pointer-events: none;
+z-index: 9996;
+}
+.scroll-indicator {
+position: fixed;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+width: 30px;
+height: 150px;
+z-index: 100;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.scroll-track {
+width: 4px;
+height: 100px;
+background-color: rgba(156, 163, 175, 0.3);
+border-radius: 2px;
+position: relative;
+}
+.scroll-thumb {
+width: 8px;
+height: 20px;
+background-color: #6366F1;
+border-radius: 4px;
+position: absolute;
+left: -2px;
+top: 0;
+transition: top 0.1s ease;
+}
+.scroll-cartoon {
+width: 60px;
+height: 60px;
+position: absolute;
+right: 15px;
+transition: top 0.3s ease, transform 0.3s ease;
+/* animation: float 3s ease-in-out infinite; */
+}
+@keyframes float {
+0%, 100% {
+transform: translateY(0);
+}
+50% {
+transform: translateY(-10px);
+}
+}
+.section-indicator {
+position: absolute;
+right: 70px;
+background-color: #6366F1;
+color: white;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 12px;
+opacity: 0;
+transition: opacity 0.3s ease;
+white-space: nowrap;
+}
+.section-indicator::after {
+content: '';
+position: absolute;
+right: -8px;
+top: 50%;
+transform: translateY(-50%);
+border-width: 6px;
+border-style: solid;
+border-color: transparent transparent transparent #6366F1;
+}
+@keyframes fall {
+0% {
+transform: translateY(0);
+opacity: 1;
+}
+100% {
+transform: translateY(100px);
+opacity: 0;
+}
+}
+@keyframes float {
+0% {
+transform: translate(0, 0);
+opacity: 1;
+}
+100% {
+transform: translate(random(50px), -100px);
+opacity: 0;
+}
+}
+.reveal {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.active {
+opacity: 1;
+transform: translateY(0);
+}
+.dark {
+background-color: #111827;
+color: #f3f4f6;
+}
+.dark .navbar {
+background-color: rgba(17, 24, 39, 0.8);
+}
+.dark .section-card {
+background-color: #1f2937;
+}
+</style>
+</head>
+<body class="dark bg-gray-900 text-gray-100 overflow-x-hidden transition-all duration-300">
+<div class="progress-bar"></div>
+<div class="splash-screen flex flex-col items-center justify-center">
+<div class="testimonial text-white text-xl md:text-2xl">
+"Working with you was a game-changer for our startup. Your technical expertise saved us months of development time!"
+<p class="mt-2 text-sm text-gray-400">- Mahesh, P.M at AEIOTECH</p>
+</div>
+<div class="testimonial text-white text-xl md:text-2xl">
+"Your attention to detail and problem-solving skills helped us overcome challenges we'd been stuck on for weeks."
+<p class="mt-2 text-sm text-gray-400">- Shiva CTO at AEIOTECH</p>
+</div>
+<div class="testimonial text-white text-xl md:text-2xl">
+"The e-commerce solution you built increased our conversion rate by 45%. Simply outstanding work!"
+<p class="mt-2 text-sm text-gray-400">- Mohammad Arif, Founder of Modern furniture</p>
+</div>
+<div class="logo-reveal text-center">
+<h1 class="font-['Pacifico'] text-6xl text-white mb-2">Afzal-Ut-Tijarah</h1>
+<p class="text-gray-300 text-xl">Full Stack Developer & Designer</p>
+</div>
+</div>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<nav class="navbar fixed top-0 w-full bg-gray-900 bg-opacity-80 backdrop-blur-md z-50 transition-colors duration-300 shadow-sm">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<a href="#" class="font-['Pacifico'] text-2xl text-primary">Mohammad Noor...</a>
+<div class="hidden md:flex items-center space-x-6">
+<a href="#about" class="text-sm font-medium hover:text-primary transition-colors cursor-pointer">About</a>
+<a href="#skills" class="text-sm font-medium hover:text-primary transition-colors cursor-pointer">Skills</a>
+<a href="#projects" class="text-sm font-medium hover:text-primary transition-colors cursor-pointer">Projects</a>
+<a href="#testimonials" class="text-sm font-medium hover:text-primary transition-colors cursor-pointer">Testimonials</a>
+<a href="#contact" class="text-sm font-medium hover:text-primary transition-colors cursor-pointer">Contact</a>
+<button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer group">
+<i class="ri-sun-fill ri-lg group-hover:rotate-45 transition-transform duration-300"></i>
+</button>
+</div>
+<div class="flex items-center space-x-4 md:hidden">
+<button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer group">
+<i class="ri-sun-fill ri-lg group-hover:rotate-45 transition-transform duration-300"></i>
+</button>
+<button id="mobile-menu-button" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors cursor-pointer">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</div>
+</nav>
+<div class="scroll-indicator">
+<div class="scroll-track">
+<div class="scroll-thumb"></div>
+</div>
+<div class="scroll-cartoon">
+<img src="flying_jpg-removebg-preview.png">
+</div>
+<div class="section-indicator">Home</div>
+</div>
+<main class="pt-20 pb-16">
+<section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+<div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 reveal">
+<h1 class="text-4xl md:text-5xl font-bold mb-4">Turning Complex Problems into <span class="text-primary">Elegant Solutions</span></h1>
+<p class="text-lg text-gray-600 mb-8">Full stack developer specializing in creating beautiful, functional, and user-centered digital experiences.</p>
+<div class="flex space-x-4">
+<a href="#projects" class="px-6 py-3 bg-primary text-white font-medium !rounded-button shadow-lg hover:shadow-xl transition-shadow cursor-pointer">View My Work</a>
+<a href="#contact" class="px-6 py-3 border border-gray-300 font-medium !rounded-button hover:border-primary hover:text-primary transition-colors cursor-pointer">Get in Touch</a>
+</div>
+</div>
+<div class="md:w-1/2 mt-12 md:mt-0 reveal" style="animation-delay: 0.2s;">
+<img src="https://readdy.ai/api/search-image?query=professional%20developer%20working%20on%20multiple%20screens%2C%20digital%20illustration%2C%20modern%20workspace%2C%20coding%20environment%2C%20programming%20visualization%2C%20blue%20and%20purple%20color%20scheme%2C%20side%20view%20of%20person%2C%20high%20quality%20digital%20art&width=600&height=500&seq=hero1&orientation=landscape" alt="Developer illustration" class="w-full h-auto rounded-lg shadow-xl">
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+<i class="ri-arrow-down-line ri-2x text-primary"></i>
+</div>
+</section>
+<section id="about" class="py-20 bg-gray-800">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16 reveal">About Me</h2>
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-2/5 reveal">
+<img src="about-section-pic.jpg" alt="Profile picture" class="w-full h-auto rounded-lg shadow-lg">
+</div>
+<div class="md:w-3/5 reveal" style="animation-delay: 0.2s;">
+<h3 class="text-2xl font-semibold mb-4">Hi, I'm <span class="text-primary">Mohammad Noor...</span></h3>
+<p class="text-gray-600 mb-6">I'm a passionate full stack developer and designer with over 3 years of experience building digital products that solve real-world problems. My journey in tech began with a fascination for how things work, which evolved into a career creating intuitive and impactful digital experiences.</p>
+<p class="text-gray-600 mb-6">I specialize in JavaScript ecosystems (React, Node.js), modern CSS frameworks, and cloud architecture. My approach combines technical expertise with design thinking to create solutions that are not just functional, but delightful to use.</p>
+<p class="text-gray-600 mb-8">When I'm not coding, you'll find me hiking mountain trails, experimenting with new cooking recipes, or mentoring aspiring developers in my community.</p>
+<div class="flex space-x-4">
+<a href="https://github.com/mohammadgithub2326" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-twitter-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-dribbble-fill ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="skills" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16 reveal">My Skills</h2>
+<div class="grid grid-cols-1 text-gray-600  md:grid-cols-3 gap-8">
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mb-6">
+<i class="ri-code-s-slash-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl text-gray-600  font-semibold mb-4">Frontend Development</h3>
+<p class="text-gray-600 mb-6">Creating responsive, accessible, and performant user interfaces with modern frameworks and vanilla JavaScript.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">React</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Vue.js</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">TypeScript</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Tailwind CSS</span>
+<!-- <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">SASS</span> -->
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Next.js</span>
+</div>
+</div>
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.2s;">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mb-6">
+<i class="ri-server-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Backend Development</h3>
+<p class="text-gray-600 mb-6">Building robust, scalable, and secure server-side applications and APIs with modern technologies.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Node.js</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Express</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Python</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Django</span>
+<!-- <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">GraphQL</span> -->
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">MongoDB</span>
+</div>
+</div>
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.4s;">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mb-6">
+<i class="ri-palette-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">UI/UX Design</h3>
+<p class="text-gray-600 mb-6">Crafting intuitive user experiences and visually appealing interfaces that delight users and achieve business goals.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Figma</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Adobe XD</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Sketch</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">User Research</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Prototyping</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Wireframing</span>
+</div>
+</div>
+</div>
+<div class="mt-16 grid grid-cols-1 text-gray-600  md:grid-cols-2 gap-8">
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.2s;">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mb-6">
+<i class="ri-cloud-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">DevOps & Cloud</h3>
+<p class="text-gray-600 mb-6">Implementing CI/CD pipelines and managing cloud infrastructure for scalable and reliable applications.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">AWS</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Docker</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Kubernetes</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">GitHub Actions</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Terraform</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Jenkins</span>
+</div>
+</div>
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.4s;">
+<div class="w-16 h-16 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mb-6">
+<i class="ri-database-2-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Database & Data Management</h3>
+<p class="text-gray-600 mb-6">Designing efficient database schemas and implementing data management solutions for various application needs.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">PostgreSQL</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">MySQL</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Redis</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Firebase</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Elasticsearch</span>
+<span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Data Modeling</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="projects" class="py-20 bg-gray-800">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16 reveal">Featured Projects</h2>
+<div class="grid grid-cols-1 text-gray-600  md:grid-cols-2 gap-10">
+<div class="section-card bg-white rounded-lg overflow-hidden shadow-lg reveal transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+<div class="relative h-64 overflow-hidden group">
+<div class="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+<img src="https://readdy.ai/api/search-image?query=e-commerce%20website%20dashboard%20interface%2C%20modern%20UI%20design%2C%20data%20visualization%2C%20product%20management%20screen%2C%20professional%20web%20application%20interface%2C%20clean%20design%20with%20blue%20and%20white%20color%20scheme&width=600&height=400&seq=project1&orientation=landscape" alt="E-commerce Platform" class="w-full h-full object-cover">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+<div class="absolute bottom-4 left-4">
+<span class="px-3 py-1 bg-primary text-white text-xs rounded-full">E-commerce</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">StyleHouse E-commerce Platform</h3>
+<p class="text-gray-600 mb-4">A complete e-commerce solution with advanced product filtering, real-time inventory management, and integrated payment processing.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">React</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Node.js</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">MongoDB</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Stripe API</span>
+</div>
+<div class="flex justify-between">
+<!-- <a href="#" class="text-primary font-medium flex items-center cursor-pointer">
+<span>View Case Study</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</a> -->
+<a href="#" class="text-gray-500 hover:text-primary transition-colors cursor-pointer">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="section-card bg-white rounded-lg overflow-hidden shadow-lg reveal transform transition-all duration-300 hover:scale-105 hover:shadow-2xl" style="animation-delay: 0.2s;">
+<div class="relative h-64 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=financial%20dashboard%20app%20interface%2C%20data%20visualization%20charts%2C%20financial%20analytics%2C%20modern%20UI%20design%2C%20professional%20web%20application%20interface%2C%20clean%20design%20with%20purple%20and%20white%20color%20scheme&width=600&height=400&seq=project2&orientation=landscape" alt="Financial Dashboard" class="w-full h-full object-cover">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+<div class="absolute bottom-4 left-4">
+<span class="px-3 py-1 bg-primary text-white text-xs rounded-full">FinTech</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">WealthTrack Financial Dashboard</h3>
+<p class="text-gray-600 mb-4">An intuitive financial management application with real-time data visualization, expense tracking, and investment portfolio analysis.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Vue.js</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Express</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">PostgreSQL</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">D3.js</span>
+</div>
+<div class="flex justify-between">
+<!-- <a href="#" class="text-primary font-medium flex items-center cursor-pointer">
+<span>View Case Study</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</a> -->
+<a href="#" class="text-gray-500 hover:text-primary transition-colors cursor-pointer">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="section-card bg-white rounded-lg overflow-hidden shadow-lg reveal transform transition-all duration-300 hover:scale-105 hover:shadow-2xl" style="animation-delay: 0.3s;">
+<div class="relative h-64 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=health%20and%20fitness%20mobile%20app%20interface%2C%20workout%20tracking%2C%20nutrition%20planning%2C%20modern%20UI%20design%2C%20professional%20mobile%20application%20interface%2C%20clean%20design%20with%20green%20and%20white%20color%20scheme&width=600&height=400&seq=project3&orientation=landscape" alt="Health App" class="w-full h-full object-cover">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+<div class="absolute bottom-4 left-4">
+<span class="px-3 py-1 bg-primary text-white text-xs rounded-full">Health Tech</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">FitJourney Health & Fitness App</h3>
+<p class="text-gray-600 mb-4">A comprehensive fitness application with workout tracking, nutrition planning, and progress visualization for personalized health journeys.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">React Native</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Firebase</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">GraphQL</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">TensorFlow.js</span>
+</div>
+<div class="flex justify-between">
+<!-- <a href="#" class="text-primary font-medium flex items-center cursor-pointer">
+<span>View Case Study</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</a> -->
+<a href="#" class="text-gray-500 hover:text-primary transition-colors cursor-pointer">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="section-card bg-white rounded-lg overflow-hidden shadow-lg reveal transform transition-all duration-300 hover:scale-105 hover:shadow-2xl" style="animation-delay: 0.4s;">
+<div class="relative h-64 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=project%20management%20software%20interface%2C%20task%20tracking%2C%20team%20collaboration%2C%20modern%20UI%20design%2C%20professional%20web%20application%20interface%2C%20clean%20design%20with%20orange%20and%20white%20color%20scheme&width=600&height=400&seq=project4&orientation=landscape" alt="Project Management Tool" class="w-full h-full object-cover">
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+<div class="absolute bottom-4 left-4">
+<span class="px-3 py-1 bg-primary text-white text-xs rounded-full">Productivity</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">TaskFlow Project Management Tool</h3>
+<p class="text-gray-600 mb-4">A collaborative project management platform with real-time updates, resource allocation, and automated reporting for team productivity.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Next.js</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">TypeScript</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">Socket.io</span>
+<span class="px-2 py-1 bg-gray-100 rounded-full text-xs">AWS</span>
+</div>
+<div class="flex justify-between">
+<!-- <a href="#" class="text-primary font-medium flex items-center cursor-pointer">
+<span>View Case Study</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</a> -->
+<a href="#" class="text-gray-500 hover:text-primary transition-colors cursor-pointer">
+<i class="ri-github-fill ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mt-12 reveal">
+<button id="view-all-projects" class="inline-flex items-center px-6 py-3 bg-white border border-gray-300 text-primary font-medium !rounded-button hover:border-primary transition-colors cursor-pointer">
+<span>View All Projects</span>
+<i class="ri-arrow-right-line ml-2"></i>
+</button>
+</div>
+<div id="projects-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white dark:bg-gray-900 rounded-lg w-full max-w-4xl max-h-[80vh] overflow-y-auto m-4 transform scale-95 opacity-0 transition-all duration-300">
+<div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+<h3 class="text-xl font-semibold">All Projects</h3>
+<button id="close-projects" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="project-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105">
+<img src="https://readdy.ai/api/search-image?query=modern%20social%20media%20dashboard%20interface%2C%20data%20analytics%20visualization%2C%20professional%20web%20application%20UI%2C%20clean%20design%20with%20blue%20accent%20colors&width=600&height=400&seq=project5&orientation=landscape" alt="Social Media Dashboard" class="w-full h-48 object-cover">
+<div class="p-4">
+<span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">Analytics</span>
+<h4 class="text-lg font-semibold mt-2">Social Media Analytics Dashboard</h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Advanced analytics platform for social media performance tracking and audience insights.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">React</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">D3.js</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Node.js</span>
+</div>
+</div>
+</div>
+<div class="project-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105">
+<img src="https://readdy.ai/api/search-image?query=modern%20learning%20management%20system%20interface%2C%20online%20course%20platform%2C%20educational%20technology%20UI%2C%20clean%20design%20with%20purple%20accent%20colors&width=600&height=400&seq=project6&orientation=landscape" alt="E-Learning Platform" class="w-full h-48 object-cover">
+<div class="p-4">
+<span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">EdTech</span>
+<h4 class="text-lg font-semibold mt-2">Interactive Learning Platform</h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm mt-2">E-learning platform with interactive courses, real-time collaboration, and progress tracking.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Vue.js</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">WebRTC</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Firebase</span>
+</div>
+</div>
+</div>
+<div class="project-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105">
+<img src="https://readdy.ai/api/search-image?query=modern%20real%20estate%20property%20management%20interface%2C%20property%20listing%20dashboard%2C%20real%20estate%20technology%20UI%2C%20clean%20design%20with%20green%20accent%20colors&width=600&height=400&seq=project7&orientation=landscape" alt="Property Management System" class="w-full h-48 object-cover">
+<div class="p-4">
+<span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">PropTech</span>
+<h4 class="text-lg font-semibold mt-2">Property Management System</h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Comprehensive property management solution with virtual tours and automated maintenance tracking.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Angular</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Three.js</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Django</span>
+</div>
+</div>
+</div>
+<div class="project-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105">
+<img src="https://readdy.ai/api/search-image?query=modern%20telemedicine%20healthcare%20platform%20interface%2C%20medical%20consultation%20dashboard%2C%20healthcare%20technology%20UI%2C%20clean%20design%20with%20teal%20accent%20colors&width=600&height=400&seq=project8&orientation=landscape" alt="Telemedicine Platform" class="w-full h-48 object-cover">
+<div class="p-4">
+<span class="px-2 py-1 bg-primary bg-opacity-10 text-primary text-xs rounded-full">HealthTech</span>
+<h4 class="text-lg font-semibold mt-2">Telemedicine Platform</h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Secure telemedicine solution with video consultations and electronic health records management.</p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">React Native</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">WebRTC</span>
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">Node.js</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="testimonials" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16 reveal">Client Testimonials</h2>
+<div class="grid  text-gray-600  grid-cols-1 md:grid-cols-3 gap-8">
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal">
+<div class="flex justify-center mb-6">
+<i class="ri-double-quotes-l ri-3x text-primary opacity-20"></i>
+</div>
+<p class="text-gray-600 mb-6 text-center">Working with Mohammad was a game-changer for our startup. Their technical expertise saved us months of development time and helped us launch our MVP ahead of schedule.</p>
+<div class="flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20female%20CEO%2C%20business%20attire%2C%20neutral%20background%2C%20confident%20expression%2C%20high%20quality%20portrait&width=80&height=80&seq=test1&orientation=squarish" alt="Sarah Johnson" class="w-12 h-12 rounded-full object-cover mr-4">
+<div>
+<h4 class="font-semibold text-gray-600 ">Sarah Johnson</h4>
+<p class="text-sm text-gray-500">P.M at NEOTECH</p>
+</div>
+</div>
+</div>
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.2s;">
+<div class="flex justify-center mb-6">
+<i class="ri-double-quotes-l ri-3x text-primary opacity-20"></i>
+</div>
+<p class="text-gray-600 mb-6 text-center">Mohammd's attention to detail and problem-solving skills helped us overcome challenges we'd been stuck on for weeks. Their ability to translate complex requirements into elegant code is remarkable.</p>
+<div class="flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20an%20Asian%20male%20CTO%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20friendly%20expression%2C%20high%20quality%20portrait&width=80&height=80&seq=test2&orientation=squarish" alt="Michael Chen" class="w-12 h-12 rounded-full object-cover mr-4">
+<div>
+<h4 class="font-semibold text-gray-600 ">Michael Chen</h4>
+<p class="text-sm text-gray-500">CTO at MILES</p>
+</div>
+</div>
+</div>
+<div class="section-card bg-white p-8 rounded-lg shadow-lg reveal" style="animation-delay: 0.4s;">
+<div class="flex justify-center mb-6">
+<i class="ri-double-quotes-l ri-3x text-primary opacity-20"></i>
+</div>
+<p class="text-gray-600 mb-6 text-center">The e-commerce solution Mohammad built increased our conversion rate by 45%. Their understanding of both technical implementation and user experience design created a seamless shopping experience.</p>
+<div class="flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20Latina%20female%20entrepreneur%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20smiling%20expression%2C%20high%20quality%20portrait&width=80&height=80&seq=test3&orientation=squarish" alt="Emily Rodriguez" class="w-12 h-12 rounded-full object-cover mr-4">
+<div>
+<h4 class="font-semibold text-gray-600 ">Emily Rodriguez</h4>
+<p class="text-sm text-gray-500">Founder of StyleHouse</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="py-20 bg-gray-800 relative">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-16 reveal">Get In Touch</h2>
+<div class="flex flex-col md:flex-row gap-12">
+<div class="md:w-1/2 reveal">
+<form id="contact-form" class="bg-white p-8 text-gray-600  rounded-lg shadow-lg">
+<div class="mb-6">
+<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+<input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John Doe" required>
+</div>
+<div class="mb-6">
+<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+<input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="john@example.com" required>
+</div>
+<div class="mb-6">
+<label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+<input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Project Inquiry" required>
+</div>
+<div class="mb-6">
+<label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+<textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Tell me about your project..." required></textarea>
+</div>
+<button type="submit" class="w-full py-3 bg-primary text-white font-medium !rounded-button shadow-lg hover:shadow-xl transition-shadow cursor-pointer">Send Message</button>
+</form>
+</div>
+<div class="md:w-1/2 reveal text-gray-600 " style="animation-delay: 0.2s;">
+<div class="bg-white p-8 rounded-lg shadow-lg h-full">
+<h3 class="text-xl font-semibold text-gray-600  mb-6">Contact Information</h3>
+<div class="space-y-6 text-gray-600 ">
+<div class="flex items-start text-gray-600 ">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mr-4">
+<i class="ri-mail-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium">Email</h4>
+<p class="text-gray-600">hello@MohammdNoor.dev</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mr-4">
+<i class="ri-phone-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium">Phone</h4>
+<p class="text-gray-600">+1 (555) 123-4567</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mr-4">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium">Location</h4>
+<p class="text-gray-600">San Francisco, California</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary bg-opacity-10 mr-4">
+<i class="ri-time-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-medium">Working Hours</h4>
+<p class="text-gray-600">Monday - Friday: 9AM - 6PM PST</p>
+</div>
+</div>
+</div>
+<div class="mt-10">
+<h4 class="font-medium mb-4">Connect With Me</h4>
+<div class="flex space-x-4">
+<a href="https://github.com/mohammadgithub2326" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-github-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-linkedin-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-twitter-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors cursor-pointer">
+<i class="ri-dribbble-fill"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="get-in-touch-floating" class="fixed bottom-24 right-8 z-40">
+<div class="relative">
+<img src="jerryhello-croped.gif" alt="Contact cartoon" class="w-24 h-24 mr-0">
+<button id="floating-contact-btn" class="absolute -top-8 -right-4 px-4 py-2 bg-primary text-white font-medium !rounded-button shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+Say Hello!
+</button>
+</div>
+</div>
+</section>
+<div id="project-details-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="bg-white dark:bg-gray-900 rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300">
+<div class="sticky top-0 bg-white dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center z-10">
+<h3 class="text-xl font-semibold project-title"></h3>
+<button class="close-project-details w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<div class="project-content p-6">
+<div class="project-images grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+</div>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-semibold mb-2">Project Overview</h4>
+<p class="text-gray-600 dark:text-gray-400 project-description"></p>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-2">Key Features</h4>
+<ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 project-features">
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-2">Technologies Used</h4>
+<div class="flex flex-wrap gap-2 project-tech">
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold mb-2">Project Metrics</h4>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 project-metrics">
+</div>
+</div>
+<div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+<div class="flex space-x-4">
+<a href="#" class="project-live-link flex items-center text-primary hover:text-primary-dark transition-colors">
+<i class="ri-external-link-line mr-2"></i>
+<span>Live Demo</span>
+</a>
+<a href="#" class="project-github-link flex items-center text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">
+<i class="ri-github-fill mr-2"></i>
+<span>Source Code</span>
+</a>
+</div>
+<button class="close-project-details px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">
+Close
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<div class="mb-8 md:mb-0">
+<a href="#" class="font-['Pacifico'] text-3xl text-white">Mohammad Noor...</a>
+<p class="mt-2 text-gray-400 max-w-md">Creating beautiful, functional, and user-centered digital experiences that solve real-world problems.</p>
+</div>
+<div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-12">
+<div>
+<h4 class="font-semibold mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a href="#about" class="text-gray-400 hover:text-white transition-colors cursor-pointer">About</a></li>
+<li><a href="#skills" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Skills</a></li>
+<li><a href="#projects" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Projects</a></li>
+<li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Testimonials</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold mb-4">Resources</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Blog</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Case Studies</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Resume</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors cursor-pointer">Open Source</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm">© 2025 Mohammad Noor.... All rights reserved.</p>
+<p class="text-gray-500 text-sm mt-4 md:mt-0">Last updated: June 4, 2025</p>
+</div>
+</div>
+</footer>
+<div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+<div class="absolute right-0 top-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg transform translate-x-full transition-transform duration-300">
+<div class="p-6">
+<div class="flex justify-end mb-8">
+<button id="close-mobile-menu" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<nav class="flex flex-col space-y-6">
+<a href="#about" class="text-lg font-medium hover:text-primary transition-colors cursor-pointer">About</a>
+<a href="#skills" class="text-lg font-medium hover:text-primary transition-colors cursor-pointer">Skills</a>
+<a href="#projects" class="text-lg font-medium hover:text-primary transition-colors cursor-pointer">Projects</a>
+<a href="#testimonials" class="text-lg font-medium hover:text-primary transition-colors cursor-pointer">Testimonials</a>
+<a href="#contact" class="text-lg font-medium hover:text-primary transition-colors cursor-pointer">Contact</a>
+</nav>
+</div>
+</div>
+</div>
+<div id="success-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+<div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class="bg-white rounded-lg p-8 max-w-md w-full relative z-10">
+<button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer">
+<i class="ri-close-line ri-lg"></i>
+</button>
+<div class="text-center">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-check-line ri-2x text-green-500"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Message Sent!</h3>
+<p class="text-gray-600 mb-6">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+<button id="confirm-modal" class="px-6 py-2 bg-primary text-white font-medium !rounded-button cursor-pointer">Got it</button>
+</div>
+</div>
+</div>
+<script id="splash-screen-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const progressBar = document.querySelector('.progress-bar');
+const splashScreen = document.querySelector('.splash-screen');
+function updateProgressBar() {
+const scrollTop = window.scrollY;
+const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+const scrollPercent = (scrollTop / docHeight) * 100;
+progressBar.style.width = scrollPercent + '%';
+}
+window.addEventListener('scroll', updateProgressBar);
+window.addEventListener('resize', updateProgressBar);
+// Simulate initial loading
+let progress = 0;
+const loadingInterval = setInterval(() => {
+progress += Math.random() * 25;
+if (progress > 100) progress = 100;
+progressBar.style.width = progress + '%';
+if (progress === 100) clearInterval(loadingInterval);
+}, 500);
+const testimonials = document.querySelectorAll('.testimonial');
+const logoReveal = document.querySelector('.logo-reveal');
+let currentTestimonial = 0;
+function showTestimonial(index) {
+testimonials.forEach((testimonial, i) => {
+if (i === index) {
+testimonial.style.opacity = '1';
+testimonial.style.transform = 'translateY(0)';
+} else {
+testimonial.style.opacity = '0';
+testimonial.style.transform = 'translateY(20px)';
+}
+});
+}
+function nextTestimonial() {
+currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+showTestimonial(currentTestimonial);
+}
+// Start testimonial animation
+showTestimonial(0);
+const testimonialInterval = setInterval(nextTestimonial, 2000);
+// Show logo after testimonials
+setTimeout(() => {
+clearInterval(testimonialInterval);
+testimonials.forEach(testimonial => {
+testimonial.style.opacity = '0';
+testimonial.style.transform = 'translateY(20px)';
+});
+logoReveal.style.opacity = '1';
+logoReveal.style.transform = 'scale(1)';
+// Hide splash screen after logo reveal
+setTimeout(() => {
+splashScreen.style.opacity = '0';
+setTimeout(() => {
+splashScreen.style.display = 'none';
+}, 500);
+}, 2000);
+}, 6000);
+});
+</script>
+<script id="project-details">
+document.addEventListener('DOMContentLoaded', function() {
+const projectCards = document.querySelectorAll('.project-card');
+const projectModal = document.getElementById('project-details-modal');
+const modalContent = projectModal.querySelector('.bg-white');
+const closeButtons = document.querySelectorAll('.close-project-details');
+const projectData = {
+stylehouse: {
+title: "StyleHouse E-commerce Platform",
+description: "StyleHouse is a comprehensive e-commerce solution designed to provide a seamless shopping experience for both customers and administrators. The platform features advanced product filtering, real-time inventory management, and integrated payment processing, making it a powerful tool for modern online retail.",
+features: [
+"Advanced product filtering and search capabilities",
+"Real-time inventory management system",
+"Secure payment processing with Stripe integration",
+"Customizable product variants and attributes",
+"Automated order fulfillment workflow",
+"Analytics dashboard with sales insights",
+"Customer review and rating system",
+"Mobile-responsive design"
+],
+technologies: [
+{name: "React", class: "bg-blue-100 text-blue-800"},
+{name: "Node.js", class: "bg-green-100 text-green-800"},
+{name: "MongoDB", class: "bg-purple-100 text-purple-800"},
+{name: "Stripe API", class: "bg-indigo-100 text-indigo-800"},
+{name: "Redux", class: "bg-pink-100 text-pink-800"},
+{name: "AWS S3", class: "bg-yellow-100 text-yellow-800"}
+],
+metrics: [
+{label: "Conversion Rate", value: "+45%", icon: "ri-line-chart-line"},
+{label: "User Engagement", value: "+60%", icon: "ri-user-heart-line"},
+{label: "Load Time", value: "0.8s", icon: "ri-timer-flash-line"},
+{label: "Sales Growth", value: "+75%", icon: "ri-money-dollar-circle-line"}
+],
+images: [
+{url: "https://readdy.ai/api/search-image?query=e-commerce%20dashboard%20analytics%20view%2C%20modern%20UI%20design%2C%20data%20visualization%20charts%2C%20professional%20interface&width=600&height=400&seq=project1_1&orientation=landscape", alt: "Dashboard Analytics"},
+{url: "https://readdy.ai/api/search-image?query=e-commerce%20product%20management%20interface%2C%20inventory%20system%2C%20modern%20UI%20design&width=600&height=400&seq=project1_2&orientation=landscape", alt: "Product Management"},
+{url: "https://readdy.ai/api/search-image?query=e-commerce%20mobile%20app%20interface%2C%20shopping%20cart%20view%2C%20clean%20design&width=600&height=400&seq=project1_3&orientation=landscape", alt: "Mobile Interface"},
+{url: "https://readdy.ai/api/search-image?query=e-commerce%20order%20processing%20system%2C%20shipping%20management%20interface&width=600&height=400&seq=project1_4&orientation=landscape", alt: "Order Processing"}
+],
+liveLink: "https://stylehouse-demo.com",
+githubLink: "https://github.com/MohammdNoor/stylehouse"
+}
+};
+function openProjectModal(projectId) {
+const project = projectData[projectId];
+if (!project) return;
+projectModal.querySelector('.project-title').textContent = project.title;
+projectModal.querySelector('.project-description').textContent = project.description;
+const featuresContainer = projectModal.querySelector('.project-features');
+featuresContainer.innerHTML = project.features.map(feature => `
+<li class="flex items-start">
+<i class="ri-checkbox-circle-line text-primary mr-2 mt-1"></i>
+<span>${feature}</span>
+</li>
+`).join('');
+const techContainer = projectModal.querySelector('.project-tech');
+techContainer.innerHTML = project.technologies.map(tech => `
+<span class="px-3 py-1 rounded-full text-sm ${tech.class}">${tech.name}</span>
+`).join('');
+const metricsContainer = projectModal.querySelector('.project-metrics');
+metricsContainer.innerHTML = project.metrics.map(metric => `
+<div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary bg-opacity-10 mb-2">
+<i class="${metric.icon} text-primary"></i>
+</div>
+<div class="text-2xl font-bold text-primary">${metric.value}</div>
+<div class="text-sm text-gray-600 dark:text-gray-400">${metric.label}</div>
+</div>
+`).join('');
+const imagesContainer = projectModal.querySelector('.project-images');
+imagesContainer.innerHTML = project.images.map(image => `
+<div class="relative h-48 rounded-lg overflow-hidden shadow-md">
+<img src="${image.url}" alt="${image.alt}" class="w-full h-full object-cover">
+</div>
+`).join('');
+projectModal.querySelector('.project-live-link').href = project.liveLink;
+projectModal.querySelector('.project-github-link').href = project.githubLink;
+projectModal.classList.remove('hidden');
+setTimeout(() => {
+modalContent.style.transform = 'scale(1)';
+modalContent.style.opacity = '1';
+}, 100);
+}
+function closeProjectModal() {
+modalContent.style.transform = 'scale(95%)';
+modalContent.style.opacity = '0';
+setTimeout(() => {
+projectModal.classList.add('hidden');
+}, 300);
+}
+projectCards.forEach(card => {
+card.addEventListener('click', () => {
+const projectId = card.dataset.project;
+openProjectModal(projectId);
+});
+});
+closeButtons.forEach(button => {
+button.addEventListener('click', closeProjectModal);
+});
+projectModal.addEventListener('click', (e) => {
+if (e.target === projectModal) {
+closeProjectModal();
+}
+});
+});
+</script>
+<script id="cursor-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+const body = document.body;
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const closeMobileMenu = document.getElementById('close-mobile-menu');
+const mobileMenuContent = mobileMenu.querySelector('.absolute');
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+let isDarkMode = body.classList.contains('dark');
+function toggleDarkMode() {
+isDarkMode = !isDarkMode;
+if (isDarkMode) {
+body.classList.add('dark');
+themeToggle.innerHTML = '<i class="ri-sun-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+themeToggleMobile.innerHTML = '<i class="ri-sun-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+} else {
+body.classList.remove('dark');
+themeToggle.innerHTML = '<i class="ri-moon-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+themeToggleMobile.innerHTML = '<i class="ri-moon-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+}
+}
+themeToggle.addEventListener('click', toggleDarkMode);
+themeToggleMobile.addEventListener('click', toggleDarkMode);
+// Mobile menu toggle
+mobileMenuButton.addEventListener('click', () => {
+mobileMenu.classList.remove('hidden');
+setTimeout(() => {
+mobileMenuContent.style.transform = 'translateX(0)';
+}, 100);
+});
+closeMobileMenu.addEventListener('click', () => {
+mobileMenuContent.style.transform = 'translateX(100%)';
+setTimeout(() => {
+mobileMenu.classList.add('hidden');
+}, 300);
+});
+// Close menu when clicking outside
+mobileMenu.addEventListener('click', (e) => {
+if (e.target === mobileMenu) {
+mobileMenuContent.style.transform = 'translateX(100%)';
+setTimeout(() => {
+mobileMenu.classList.add('hidden');
+}, 300);
+}
+});
+// Close menu when clicking menu items
+mobileMenu.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', () => {
+mobileMenuContent.style.transform = 'translateX(100%)';
+setTimeout(() => {
+mobileMenu.classList.add('hidden');
+}, 300);
+});
+});
+// Initialize theme toggle icons
+if (isDarkMode) {
+themeToggle.innerHTML = '<i class="ri-sun-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+themeToggleMobile.innerHTML = '<i class="ri-sun-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+} else {
+themeToggle.innerHTML = '<i class="ri-moon-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+themeToggleMobile.innerHTML = '<i class="ri-moon-line ri-lg group-hover:rotate-45 transition-transform duration-300"></i>';
+}
+// Update cursor position
+document.addEventListener('mousemove', (e) => {
+cursor.style.left = e.clientX + 'px';
+cursor.style.top = e.clientY + 'px';
+setTimeout(() => {
+cursorFollower.style.left = e.clientX + 'px';
+cursorFollower.style.top = e.clientY + 'px';
+}, 100);
+// Create binary particles more frequently
+if (Math.random() > 0.8) {
+createBinary(e.clientX, e.clientY);
+}
+});
+// Create binary particles
+function createBinary(x, y) {
+const binary = document.createElement('div');
+binary.classList.add('binary');
+binary.textContent = Math.random() >0.5 ? '1' : '0';
+binary.style.left = x + 'px';
+binary.style.top = y + 'px';
+binary.style.color = isDarkMode ? '#FFD700' : '#000000';
+binary.style.fontSize = Math.random() * 4 + 12 + 'px';
+binary.style.zIndex = '9999';
+binary.style.position = 'fixed';
+document.body.appendChild(binary);
+// Add falling animation with random horizontal movement
+const angle = (Math.random() - 0.5) * 0.5; // Random angle between -0.25 and 0.25 radians
+const speed = Math.random() * 2 + 1;
+let posX = x;
+let posY = y;
+let opacity = 1;
+function animate() {
+posY += speed;
+posX += Math.sin(angle) * 2;
+opacity -= 0.01;
+binary.style.transform = `translate(${posX - x}px, ${posY - y}px)`;
+binary.style.opacity = opacity;
+if (opacity > 0) {
+requestAnimationFrame(animate);
+} else {
+binary.remove();
+}
+}
+requestAnimationFrame(animate);
+}
+// Create explosion effect on click
+document.addEventListener('click', (e) => {
+createExplosion(e.clientX, e.clientY);
+});
+function createExplosion(x, y) {
+const particleCount = 30;
+const particles = [];
+for (let i = 0; i < particleCount; i++) {
+const particle = document.createElement('div');
+particle.classList.add('binary', 'explosion');
+particle.textContent = Math.random() > 0.5 ? '1' : '0';
+particle.style.position = 'fixed';
+particle.style.left = x + 'px';
+particle.style.top = y + 'px';
+particle.style.color = isDarkMode ? '#FFD700' : '#000000';
+particle.style.fontSize = Math.random() * 6 + 14 + 'px';
+particle.style.zIndex = '9999';
+document.body.appendChild(particle);
+particles.push(particle);
+const angle = (Math.random() * Math.PI * 2);
+const velocity = Math.random() * 8 + 4;
+const lifetime = Math.random() * 1000 + 500;
+let opacity = 1;
+const vx = Math.cos(angle) * velocity;
+const vy = Math.sin(angle) * velocity;
+let posX = 0;
+let posY = 0;
+function animate(startTime) {
+const elapsed = Date.now() - startTime;
+const progress = elapsed / lifetime;
+if (progress < 1) {
+opacity = 1 - progress;
+posX += vx;
+posY += vy;
+particle.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 0.5}deg)`;
+particle.style.opacity = opacity;
+requestAnimationFrame(() => animate(startTime));
+} else {
+particle.remove();
+}
+}
+animate(Date.now());
+}
+}
+// Update cursor style for clickable elements
+document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+el.addEventListener('mouseenter', () => {
+cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+});
+el.addEventListener('mouseleave', () => {
+cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+});
+});
+// Theme toggle functionality is already handled above
+});
+</script>
+<script id="scroll-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const scrollThumb = document.querySelector('.scroll-thumb');
+const scrollCartoon = document.querySelector('.scroll-cartoon');
+const sectionIndicator = document.querySelector('.section-indicator');
+let lastScrollY = window.scrollY;
+let tiltDirection = 1;
+let bounceOffset = 0;
+const sections = document.querySelectorAll('section');
+const revealElements = document.querySelectorAll('.reveal');
+// Update scroll indicator position
+window.addEventListener('scroll', () => {
+const scrollTop = window.scrollY;
+const docHeight = document.body.offsetHeight;
+const winHeight = window.innerHeight;
+const scrollPercent = scrollTop / (docHeight - winHeight);
+const scrollPosition = scrollPercent * 80; // 80 is the track height minus thumb height
+scrollThumb.style.top = `${scrollPosition}px`;
+const scrollDelta = scrollTop - lastScrollY;
+lastScrollY = scrollTop;
+// Add tilt effect based on scroll direction
+const tiltAmount = Math.min(Math.abs(scrollDelta), 15) * Math.sign(scrollDelta);
+const bounce = Math.sin(Date.now() / 300) * 5;
+scrollCartoon.style.top = `${scrollPosition - 25 + bounce}px`;
+scrollCartoon.style.transform = `rotate(${tiltAmount}deg) scale(${1 + Math.abs(bounce) / 100})`;
+// Update section indicator
+let currentSection = '';
+sections.forEach(section => {
+const sectionTop = section.offsetTop;
+const sectionHeight = section.offsetHeight;
+if (scrollTop >= sectionTop - 200 && scrollTop < sectionTop + sectionHeight - 200) {
+currentSection = section.id.charAt(0).toUpperCase() + section.id.slice(1);
+sectionIndicator.textContent = currentSection;
+sectionIndicator.style.opacity = '1';
+}
+});
+// Reveal elements on scroll
+revealElements.forEach(el => {
+const elementTop = el.getBoundingClientRect().top;
+const elementVisible = 150;
+if (elementTop < window.innerHeight - elementVisible) {
+el.classList.add('active');
+}
+});
+});
+// Show section name on hover
+scrollCartoon.addEventListener('mouseenter', () => {
+sectionIndicator.style.opacity = '1';
+});
+scrollCartoon.addEventListener('mouseleave', () => {
+setTimeout(() => {
+sectionIndicator.style.opacity = '0';
+}, 1000);
+});
+});
+</script>
+<script id="projects-overlay-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const viewAllProjectsBtn = document.getElementById('view-all-projects');
+const projectsOverlay = document.getElementById('projects-overlay');
+const projectsContent = projectsOverlay.querySelector('.bg-white');
+const closeProjectsBtn = document.getElementById('close-projects');
+viewAllProjectsBtn.addEventListener('click', () => {
+projectsOverlay.classList.remove('hidden');
+setTimeout(() => {
+projectsContent.style.transform = 'scale(1)';
+projectsContent.style.opacity = '1';
+}, 100);
+// Create floating binary effect
+createFloatingBinary();
+});
+function createFloatingBinary() {
+const container = projectsOverlay.querySelector('.absolute');
+for (let i = 0; i < 20; i++) {
+const binary = document.createElement('div');
+binary.textContent = Math.random() > 0.5 ? '1' : '0';
+binary.style.position = 'absolute';
+binary.style.left = Math.random() * 100 + '%';
+binary.style.top = Math.random() * 100 + '%';
+binary.style.color = 'rgba(99, 102, 241, 0.1)';
+binary.style.fontSize = Math.random() * 20 + 10 + 'px';
+binary.style.pointerEvents = 'none';
+binary.style.animation = `float ${Math.random() * 3 + 2}s linear infinite`;
+container.appendChild(binary);
+setTimeout(() => binary.remove(), 5000);
+}
+}
+closeProjectsBtn.addEventListener('click', () => {
+projectsContent.style.transform = 'scale(95%)';
+projectsContent.style.opacity = '0';
+setTimeout(() => {
+projectsOverlay.classList.add('hidden');
+}, 300);
+});
+projectsOverlay.addEventListener('click', (e) => {
+if (e.target === projectsOverlay) {
+projectsContent.style.transform = 'scale(95%)';
+projectsContent.style.opacity = '0';
+setTimeout(() => {
+projectsOverlay.classList.add('hidden');
+}, 300);
+}
+});
+});
+</script>
+<script id="contact-form-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const contactForm = document.getElementById('contact-form');
+const successModal = document.getElementById('success-modal');
+const closeModal = document.getElementById('close-modal');
+const confirmModal = document.getElementById('confirm-modal');
+const floatingContactBtn = document.getElementById('floating-contact-btn');
+// Handle contact form submission
+contactForm.addEventListener('submit', (e) => {
+e.preventDefault();
+// Show success modal
+successModal.classList.remove('hidden');
+// Reset form
+contactForm.reset();
+});
+// Close modal
+closeModal.addEventListener('click', () => {
+successModal.classList.add('hidden');
+});
+confirmModal.addEventListener('click', () => {
+successModal.classList.add('hidden');
+});
+// Floating contact button animation
+floatingContactBtn.addEventListener('click', (e) => {
+// Create popping hearts at click position
+createPopHearts(e.clientX, e.clientY);
+// Hide button
+floatingContactBtn.style.display = 'none';
+// Create floating hearts animation
+createHearts();
+// Scroll to contact form after delay
+setTimeout(() => {
+document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+// Show button again after delay
+setTimeout(() => {
+floatingContactBtn.style.display = 'block';
+}, 3000);
+}, 3000);
+});
+function createPopHearts(x, y) {
+const colors = ['#FF69B4', '#FF1493', '#FF0066', '#FF007F'];
+for (let i = 0; i < 12; i++) {
+const heart = document.createElement('div');
+heart.innerHTML = '❤️';
+heart.style.position = 'fixed';
+heart.style.left = x + 'px';
+heart.style.top = y + 'px';
+heart.style.fontSize = '24px';
+heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+heart.style.pointerEvents = 'none';
+heart.style.zIndex = '9999';
+heart.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+document.body.appendChild(heart);
+const angle = (i * (360 / 12)) * (Math.PI / 180);
+const velocity = 8;
+const vx = Math.cos(angle) * velocity;
+const vy = Math.sin(angle) * velocity;
+let opacity = 1;
+requestAnimationFrame(function animate() {
+opacity -= 0.02;
+heart.style.opacity = opacity;
+heart.style.transform = `translate(${vx * (1 - opacity) * 20}px, ${vy * (1 - opacity) * 20}px) scale(${1 + (1 - opacity)})`;
+if (opacity > 0) {
+requestAnimationFrame(animate);
+} else {
+heart.remove();
+}
+});
+}
+}
+function createHearts() {
+const cartoon = document.querySelector('#get-in-touch-floating img');
+const cartoonRect = cartoon.getBoundingClientRect();
+const centerX = cartoonRect.left + cartoonRect.width / 2;
+const centerY = cartoonRect.top + cartoonRect.height / 3;
+// Create hearts at intervals
+const heartInterval = setInterval(() => {
+const heart = document.createElement('div');
+heart.classList.add('heart');
+heart.innerHTML = '❤️';
+heart.style.left = centerX + 'px';
+heart.style.top = centerY + 'px';
+// Random position
+const angle = Math.random() * Math.PI;
+const distance = Math.random() * 50 + 20;
+const xMove = Math.cos(angle) * distance;
+const yMove = -Math.sin(angle) * distance - 50; // Move upward
+heart.style.transform = `translate(${xMove}px, ${yMove}px)`;
+document.body.appendChild(heart);
+// Remove heart after animation
+setTimeout(() => {
+heart.remove();
+}, 2000);
+}, 100);
+// Stop creating hearts after 3 seconds
+setTimeout(() => {
+clearInterval(heartInterval);
+}, 3000);
+}
+});
+</script>
+</body>
+</html>
